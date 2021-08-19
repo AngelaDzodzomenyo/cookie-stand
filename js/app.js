@@ -188,30 +188,52 @@ const locationsDiv = document.getElementById('storeLocations')
 
 function Store(location, min, max, avgCookieSale) {
   this.location = location;
-  this.min = min;
-  this.max = max;
+  this.minCust = min;
+  this.maxCust = max;
   this.avgCookieSale = avgCookieSale;
-  this.salePerHourArray = []
-
-  Store.storeEmporium.push(this);
-}
-Store.storeEmporium = [];
-Store.prototyoe.randomCustPerHour = function() {
-  this.
+  this.salePerHourArray = [];
+  this.hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm']
+  Store.allStores.push(this);  //
 }
 
+Store.prototype.randomCustPerHour = function() {
+       let min = Math.ceil(this.minCust);
+       let max = Math.floor(this.maxCust);
+        return Math.floor(Math.random() * (max - min + 1) + min);
+}
+Store.prototype.salePerHour = function() {
+  for(let i=0; i < this.hours.length; i++){
+    let customers = this.randomCustPerHour();
+    let totalCookiesSold = customers*this.avgCookieSale
+    totalCookiesSold = Math.round(totalCookiesSold)
+        this.salePerHourArray.push(totalCookiesSold);
+  }
+}
+Store.allStores = [];
 
-new Store('Seattle', '23', '65', '6.3');
-new Store('Tokyo', '3', '24', '1.2');
-new Store('Dubai', '11', '38', '3.7');
-new Store('Paris', '20', '38', '2.3');
-new Store('Lima', '2', '16', '2.3');
-console.log(Store.storeemporium);
+new Store('Seattle', 23, 65, 6.3);
+new Store('Tokyo', 3, 24, 1.2);
+new Store('Dubai', 11, 38, 3.7);
+new Store('Paris', 20, 38, 2.3);
+new Store('Lima', 2, 16, 2.3);
 
 
 
+function allSales() {
+  for (let i = 0; i < Store.allStores.length; i++) {
+     Store.allStores[i].salePerHour()
+     console.log(Store.allStores[i])
+  }
+}
+allSales();
 
+function _makeElement(tag, parent, text) {
+    const element = document.createElement(tag);
+    parent.appendChild(element);
+    if (text) {
+      element.textContent = text;
+    }
+    return element;
+  }
 
-
-
-
+//create loop like 222-227 to display all locations
