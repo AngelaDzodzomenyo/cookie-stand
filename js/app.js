@@ -242,7 +242,7 @@ Store.prototype.renderSingleLocation = function(body) {
   let total = 0;
   const rowElem = document.createElement('tr');
   body.appendChild(rowElem);
-  const theElem = _makeElement('th', rowElem, this.name);
+  _makeElement('th', rowElem, this.location);
   for (let i = 0; i < this.hours.length; i++) {
     let cookiesThisHour = this.salePerHourArray[i];
     total += cookiesThisHour;
@@ -253,19 +253,35 @@ Store.prototype.renderSingleLocation = function(body) {
 
 
 function renderAllLocations () {
-  let tbodyElem = _makeElement('tbody', locationsDiv, null);
+  const table = document.getElementById('table')
+  let tbodyElem = _makeElement('tbody', table, null);
   for (let i = 0; i < Store.allStores.length; i++) {
     Store.allStores[i].renderSingleLocation(tbodyElem);
   }
 }
 
+function makeTheHead(){
+  const table = _makeElement('table', locationsDiv)
+  table.id = "table"
+  const theadElem = _makeElement('thead', table, null);
+  const rowElem = _makeElement('tr', theadElem, null);
+  _makeElement('th', rowElem)
+  let hours = Store.allStores[0].hours
+  for (let i = 0; i < hours.length; i++){
+  let hour = hours[i]
+  _makeElement('td', rowElem, hour)
+  } 
+  _makeElement('th', rowElem, 'Total')
+}
 
 function makeTheFooter() {
-  const tfootElem = _makeElement('tfoot',locationsDiv, null);
+  const table = document.getElementById('table')
+  const tfootElem = _makeElement('tfoot',table, null);
   const rowElem = _makeElement('tr', tfootElem, null);
   _makeElement('th', rowElem, 'Hourly Total');
   let hourlyTotal = 0;
   let grandTotal = 0;
+  let hours = Store.allStores[0].hours
   for (let i = 0; i < hours.length; i++) {
     for (let j = 0; j < Store.allStores.length; j++) {
       let currentLocation = Store.allStores[j];
@@ -278,5 +294,7 @@ function makeTheFooter() {
   _makeElement('td', rowElem, grandTotal);
 }
 
+
+makeTheHead();
 renderAllLocations();
 makeTheFooter();
