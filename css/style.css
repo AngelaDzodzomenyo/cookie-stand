@@ -14,5 +14,15 @@ th, td {
 
 table{
   /* display: flex; */
-  justify-self: center;
+  justify-content: center;
+}
+
+header {
+  background-color: orangered;
+  font-size: 50px;
+  align-content: center;
+}
+
+footer{
+  background-color: orangered;
 }
