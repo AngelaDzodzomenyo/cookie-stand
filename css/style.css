@@ -1,4 +1,4 @@
-header{
+header {
   text-align: center;
 }
 
@@ -23,6 +23,10 @@ header {
   align-content: center;
 }
 
-footer{
+footer {
   background-color: orangered;
+}
+
+fieldset {
+  border: 1px solid orangered
 }

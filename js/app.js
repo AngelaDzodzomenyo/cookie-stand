@@ -298,3 +298,8 @@ function makeTheFooter() {
 makeTheHead();
 renderAllLocations();
 makeTheFooter();
+
+// get the element
+// make a listener variable to stand in for the element
+// what are we listening for? The envent.
+// now make a function to get it to work
